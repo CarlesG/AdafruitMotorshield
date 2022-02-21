@@ -81,7 +81,7 @@ boolean moviendonos = false;
 boolean primeraIteracion = true; // Es para controlar la primera iteración 
 
 // const int finCarrera =  12;   // PIN para el posible control fin de carrera
-long velocidad = 100; // Velocidad rpm
+long velocidad = 10; // Velocidad rpmP
 
 // Variables de control
 float error1 = 0; // Error 1 entre la comanda y el sensor 1
@@ -92,7 +92,7 @@ const float errorUmbral = 0; // Esto es para determinar si ya hemos llegado a do
 
 // Variables de final de carrera
 #define finCarrera1 5 // Pin del final de carrera del motor 1. Activo a 5V
-#define finCarrera2 13 // Pin del final de carrera del motor 2. Activo a 5V
+#define finCarrera2 22 // Pin del final de carrera del motor 2. Activo a 5V
 
 //----------------------------
 // INICIZALICION
@@ -101,7 +101,6 @@ const float errorUmbral = 0; // Esto es para determinar si ya hemos llegado a do
 void setup() {
   Serial.begin(9600);           // set up Serial library at 9600 bps
   // Serial.println("Stepper test!");
-
     // --------------------------
     // Inicialización de los motores
     // --------------------------
@@ -128,8 +127,9 @@ void setup() {
 //----------------------------
 void loop() 
 {
+  // Serial.println(digitalRead(finCarrera2)); // Descomentar para monitorizar el puerto de entrada del reset correspondiente al inductivo en este caso.
   // Pasos en este loop
-  // Paso 1 - Medir los angulos de los acelerómetros
+  // Paso 1 - Medir los angulos
   // Paso 2 - Si es la primera iteración, hacer que el angulo leido sea la comanda
   // Paso 3 - Calcular los error1 y error 2 entre la comanda y los angulos leidos
   // Paso 4 - Si error1>umbral movernos un paso
@@ -143,7 +143,6 @@ void loop()
   //  Serial.println("Double coil steps");
   //  myMotor2->step(100, FORWARD, DOUBLE); 
   //  myMotor2->step(100, BACKWARD, DOUBLE);
-  //  
   //  Serial.println("Interleave coil steps");
   //  myMotor2->step(100, FORWARD, INTERLEAVE); 
   //  myMotor2->step(100, BACKWARD, INTERLEAVE); 
@@ -155,11 +154,6 @@ void loop()
     // --------------------------
     // PASO 1 - Leemos los ángulos
     // --------------------------
-
-    
-
-
-    
     // ----------------------------------------
     // Primera iteración
     // ----------------------------------------
@@ -433,80 +427,6 @@ void gotoReset2() {
              
 } // END de la función gotoReset
 
-
-//------------------------------------------------------
-// FUNCIÓN PARA CAMBIAR DE MODO
-//------------------------------------------------------
-// Esta función ahora mismo no se utilizará porque nos apañamaremos con comandos. Se tendrá que activar cuando hagamos interrupciones por comando
-void updateCambioEstado() 
-{
-    maquinaEstado++;
-    if ((maquinaEstado>3) || (maquinaEstado<0)) // Si la maquina de estado se sale de margen, reajustamos
-    { 
-        maquinaEstado = AUTOMATICO1Y2;
-    }
-    
-    // Nos ubicamos en la primera fila y columna del display
-    // lcd.setCursor(0, 0);
-    
-    
-    switch (maquinaEstado)
-    {
-      
-      case AUTOMATICO1Y2:
-           // lcd.print("AUTO  1-2");
-           Serial.println("Automatico ->  1 y 2");   
-           break;
-
-      case AUTOMATICO1:
-           // lcd.print("AUTO  1  ");       
-           Serial.println("Automatico -> 1 ");   
-           break;
-      
-      case AUTOMATICO2:
-           // lcd.print("AUTO  2  ");          
-           Serial.println("Automatico -> 2 ");   
-           break;
-           
-      case PARADO:
-          // lcd.print("STOPPED");
-           break;
-      
-      case MANUAL1Y2:
-           // lcd.print("MAN 1-2"); 
-            Serial.println("Manual 1 y 2 - Modo no contemplado todavía");   
-           break;
-      
-      case MANUAL1:
-           // lcd.print("MAN 1  ");    
-           Serial.println("Manual 1 - Modo no contemplado todavía");   
-           break;
-      
-      case MANUAL2:
-           // lcd.print("MAN 2  ");   
-           Serial.println("Manual 2 - Modo no contemplado todavía");   
-           break;
-
-      
-           
-    }
-    
-    
-
-    // encoderPushButton ++;
-    // Serial.print("Botón apretado ");
-
-    //  Serial.print("Encoder PushButton -------------- : ");
-    // Serial.println(encoderPushButton);
-     
-     delay(50);    // Debouncing 
-     nEsperas = 0; //  Lo reseteamos a 0 de forma que en el bucle principal no hará nada hasta que no superemos el tiempo total de espera
-     
-
-}
-
-
-
 //------------------------------------------------------
 // ATENCIÓN A LA INTERRUPCIÓN RS232
 //------------------------------------------------------
@@ -570,8 +490,8 @@ void serialEvent()
           else if (comandoLeido == "GOTORESET")
           {
               // Llamada a la función para ir a la posición de reset
-              // gotoReset();           
-               gotoReset1();           
+              //gotoReset();          
+              //gotoReset1();           
                gotoReset2();           
           } 
           else if (comandoLeido == "GOTORESET1")
