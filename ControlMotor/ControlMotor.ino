@@ -491,7 +491,7 @@ void serialEvent()
           {
               // Llamada a la función para ir a la posición de reset
               //gotoReset();          
-              //gotoReset1();           
+               gotoReset1();           
                gotoReset2();           
           } 
           else if (comandoLeido == "GOTORESET1")
