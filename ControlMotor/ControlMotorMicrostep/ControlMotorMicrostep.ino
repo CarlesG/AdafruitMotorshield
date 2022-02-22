@@ -29,23 +29,12 @@ Adafruit_StepperMotor *myMotor2 = AFMS.getStepper(200, 2); // Motor 2 conectado 
 //----------------------------
 
 // Máquina de estados: Estados posibles
-#define AUTOMATICO1Y2 0
-#define AUTOMATICO1   1
-#define AUTOMATICO2   2
-#define PARADO        3 // No hace caso a nadie
-#define MANUAL1Y2     4
-#define MANUAL1       5
-#define MANUAL2       6
-
-volatile int maquinaEstado  = AUTOMATICO1Y2;
-
 // Pausas para esperar a funcionar entre cambio de estados. Cada vez que se cambia de estado, se espera un tiempo para empezar a aplicar los cambios
+
 #define       TIEMPO  1
 #define       MINI_ESPERA  100 // Los milisegundos que tenemos que esperar hasta al
 int           NESPERAS = round(TIEMPO*1000/MINI_ESPERA);
 volatile int  nEsperas = 0; // Esta variabla la reseteará la atención de interrupción al cambio de estado
-
-
 
 //----------------------------
 // VARIABLES GLOBALES
@@ -113,14 +102,12 @@ void setup() {
     // Definimos los pines de final de carrera
     pinMode(finCarrera1, INPUT);
     pinMode(finCarrera2, INPUT);    
-    
-    
 }
-
 
 //----------------------------
 // BUCLE SIN FIN
 //----------------------------
+
 void loop() 
 {
   // Serial.println(digitalRead(finCarrera2)); // Descomentar para monitorizar el puerto de entrada del reset correspondiente al inductivo en este caso.
@@ -496,16 +483,11 @@ void serialEvent()
                   Serial.println(velocidad);
                   myMotor1->setSpeed(velocidad);  // Actualizamos la velocidad
                   myMotor2->setSpeed(velocidad);  // Actualizamos la velocidad
-                  
               }     
          }
-                    
           inputString = ""; // Clear string for new input
-  
       } // END de IF inCHAR
-   
   } // END the WHILE
-
 } // END the la function
 
 
@@ -514,21 +496,21 @@ void serialEvent()
 //------------------------------------------------------
 
 // -------------------------------------------
-float asin(float c){
-float out;
-out= ((c+(c*c*c)/6+(3*c*c*c*c*c)/40+(5*c*c*c*c*c*c*c)/112+
+float asin(float c)
+{
+  float out;
+  out= ((c+(c*c*c)/6+(3*c*c*c*c*c)/40+(5*c*c*c*c*c*c*c)/112+
 (35*c*c*c*c*c*c*c*c*c)/1152 +(c*c*c*c*c*c*c*c*c*c*c*0.022)+
 (c*c*c*c*c*c*c*c*c*c*c*c*c*.0173)+(c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*.0139)+
 (c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*0.0115)+(c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*c*0.01)
 ));
-
 //asin
-if(c>=.96 && c<.97){out=1.287+(3.82*(c-.96)); }
-if(c>=.97 && c<.98){out=(1.325+4.5*(c-.97));} // arcsin
-if(c>=.98 && c<.99){out=(1.37+6*(c-.98));}
-if(c>=.99 && c<=1){out=(1.43+14*(c-.99));}
-return out;}
-
+  if(c>=.96 && c<.97){out=1.287+(3.82*(c-.96)); }
+  if(c>=.97 && c<.98){out=(1.325+4.5*(c-.97));} // arcsin
+  if(c>=.98 && c<.99){out=(1.37+6*(c-.98));}
+  if(c>=.99 && c<=1){out=(1.43+14*(c-.99));}
+  return out;
+}
 
 // -------------------------------------------
 float acos(float c)
@@ -540,9 +522,11 @@ float acos(float c)
 
 // -------------------------------------------
 float atan(float c)
-{float out;
-out=asin(c/(sqrt(1+c*c)));
-return out;}
+{
+  float out;
+  out=asin(c/(sqrt(1+c*c)));
+  return out;
+}
 
 
 // -------------------------------------------
@@ -553,5 +537,4 @@ float sign(float x)
     return 1;
   else
     return -1;
- 
- }
+}
