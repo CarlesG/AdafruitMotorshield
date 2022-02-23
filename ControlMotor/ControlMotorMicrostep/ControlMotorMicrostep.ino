@@ -303,7 +303,6 @@ void gotoReset1() {
 } // END de la función gotoReset
 
 void gotoReset2() {
-
     int valor = digitalRead(finCarrera2);
 //    // Lo sacamos de la posición de reset en caso de que estuviera
     if (valor==1)
@@ -321,15 +320,15 @@ void gotoReset2() {
     // Volvemos a leer el fin de carrera
     valor = digitalRead(finCarrera2);
     // Buscamos la posición de reset
-     while (valor==0)
-     {   
+    while (valor==0)
+    {   
         valor = digitalRead(finCarrera2);
         myMotor2->step(STEP, FORWARD, MICROSTEP); 
         posicionActual2 = posicionActual2 + SENTIDOMOTOR2*STEP;  
-     }
+    }
     if (sign(SENTIDOMOTOR2)*sign(offset2)==1)
-          myMotor2 -> step(abs(offset2), FORWARD , MICROSTEP); 
-      else
+        myMotor2 -> step(abs(offset2), FORWARD , MICROSTEP); 
+    else
         myMotor2 -> step(abs(offset2), BACKWARD   , MICROSTEP); 
     // Ahora desplazamos el offset del motor
     // myMotor2->step(offset2, BACKWARD, MICROSTEP);
@@ -337,7 +336,6 @@ void gotoReset2() {
     posicionActual2 = posicionActual2 + SENTIDOMOTOR2*offset2;
     posicionRef2 = posicionActual2;        
     myMotor2 -> release(); // Liberamos el motor
-             
 } // END de la función gotoReset
 
 //------------------------------------------------------
@@ -356,7 +354,6 @@ void serialEvent()
       // so the main loop can do something about it:
       if (inChar == '\n') {
           //  stringComplete = true;
-    
           // Serial.print("Secuencia capturada:");
           // Serial.println(inputString);
 
@@ -417,12 +414,6 @@ void serialEvent()
               // Llamada a la función para ir a la posición de reset
                gotoReset2();           
           } 
-
-          else if (comandoLeido == "CAMBIOMODO")
-          {
-              // updateCambioEstado();
-                 Serial.println("Deshabilitado el cambio de modo");
-          }
           else if (comandoLeido == "RESETVALUES") 
           {
               posicionRef = 0;

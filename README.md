@@ -21,7 +21,7 @@ In our case, we make the program two work with two motors.
 
 ### 2.1. Connection of the stepper motor. 
 
-We supply the motor with 10 V and max 2 A.
+We supply the motor with 7 V and max 2 A.
 
 The connection of motor wires are:
 
@@ -45,5 +45,21 @@ The input mapping variables for the arduino are:
 
 We use serial port events for communicate with the Arduino. For testing, we use the Serial Monitor of the Arduino IDE.
 
-
+|COMMAND |DESCRIPTION |
+|-|-|
+|**POSITION1:**|the motor 1 will go to a indicated position|
+|**POSITION2:**|the motor 2 will go to the indicated position|
+|**POSITION:**|the motor 1 and 2 will go to the indicated position|
+|**GOTORESET1**|the motor 1 goes to the assigned reset position|
+|**GOTORESET2**|the motor 2 goes to the assignes reset position|
+|**RESETVALUES1**|the actual position of the motor 1 is the position 0|
+|**RESETVALUES2**|the actual position of the motor 2 is the position 0|
+|**RESETVALUES**|the actual position of both motor is the actual position|
+|***IDN?**|the arduino send the info of the arduino program.|
+|**VEL?**|return the value of the velocity of the motors.|
+|**VEL:**|set the velocity to a given value|
+|**OFFSET1:**|set the velocity to a given value|
+|**OFFSET2:**|set the velocity to a given value|
+|**OFFSET?**|set the velocity to a given value|
+   
 
