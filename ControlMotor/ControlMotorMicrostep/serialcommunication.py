@@ -1,6 +1,15 @@
 import serial, time
 from serial.tools import list_ports
 
+def escribir_posicion(serial,posicion):
+    serial.write(bytes('POSITION2:' + str(posicion) + '\r\n','utf-8'))
+
+def leer_posicion(serial):
+    serial.write(bytes('POSITION2?\r\n','utf-8'))
+    msg = serial.readline().decode("utf-8")
+    msg = msg.removesuffix('\r\n')
+    print(msg)
+    return int(msg)
 
 # Look what there are in the serial ports
 ports = list_ports.comports()
@@ -21,11 +30,8 @@ else:
     print('Serial port ' + port + ' opened.')
     time.sleep(1) # We have to wait some time before send anything to the Arduino
     try:
-        ser.write(b'POSITION2:200\r\n') # carry return and newline
-        ser.write(b'POSITION2?\r\n') # carry return and newline
-        msg = ser.readline().decode("utf-8")
-        #print(msg)
-        msg = msg.removesuffix('\r\n')
+        escribir_posicion(ser, 200)
+        msg = leer_posicion(ser)
         print('Posición leida: ',msg)
     except serial.SerialException as var2:
         print('An exception occured')
@@ -33,13 +39,3 @@ else:
     else:
         ser.close()
         print('Closed PORT')
-
-
-
-def escribir_posicion():
-    
-    pass
-
-def leer_posicion():
-    pass
-
