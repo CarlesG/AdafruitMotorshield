@@ -62,4 +62,4 @@ We use serial port events for communicate with the Arduino. For testing, we use 
 |**OFFSET2:**|set the velocity to a given value|
 |**OFFSET?**|set the velocity to a given value|
    
-
+For testing the communication

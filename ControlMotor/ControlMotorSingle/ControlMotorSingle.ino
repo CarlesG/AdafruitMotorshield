@@ -1,4 +1,4 @@
-/* 
+  /* 
 This is a test sketch for the Adafruit assembled Motor Shield for Arduino v2
 It won't work with v1.x motor shields! Only for the v2's with built in PWM
 control
@@ -457,12 +457,10 @@ void serialEvent()
                 Serial.println(posicionActual1);              
               else
                 Serial.println(posicionActual2);
-              
-                
           }
           else if (comandoLeido == "POSITION1?")
           {
-            Serial.println(posicionActual1);              
+            Serial.println(posicionActual1);   
           }
           else if (comandoLeido == "POSITION2?")
           {
@@ -471,7 +469,7 @@ void serialEvent()
           else if (comandoLeido == "VEL?")
           {              
             // Serial.println("HOLA");
-              Serial.println(velocidad);
+            Serial.println(velocidad);
           }
           else if (comandoLeido == "*IDN?")
           {
