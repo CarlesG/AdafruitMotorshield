@@ -1,5 +1,6 @@
 import serial, time
 from serial.tools import list_ports
+import numpy as np
 
 def main():
     # Look what there are in the serial ports
@@ -22,26 +23,22 @@ def main():
         time.sleep(3) # We have to wait some time before send anything to the Arduino
         try:
         # Testing position function. 
+        
             write_position(ser,100)
             while(int(read_position(ser)) != 100):
                 print(read_position(ser))
-        # Testing reset values
-            reset_values(ser)
-            print(read_position(ser))
         # Testing  go to reset function 
             gotoreset(ser) 
-            time.sleep(2)
-            reset_values(ser)
+            ser.flush()
             print(read_position(ser))
-
+            
         except serial.SerialException as var2:
             print('An exception occured')
             print('Exception details', var2)
         else:
-            reset_values(ser)
-            time.sleep(1)
-            print(read_position(ser))
-            
+            pass
+
+
 def write_position(serial,position):
     ''' Write the desired position in serial port for motor 2
 
@@ -70,8 +67,6 @@ def read_position(serial):
     -------
     None
     '''
-    serial.reset_output_buffer()
-    serial.reset_input_buffer()
     serial.write(bytes('POSITION2?\r\n','utf-8'))
     msg = serial.readline().decode("utf-8")
     msg = msg.removesuffix('\r\n')
@@ -94,22 +89,6 @@ def gotoreset(serial):
     while(read_position(serial) == ""):
         pass
     print('I have finished the reset')
-
-def reset_values(serial):
-    ''' Set the zero position to the current position of the motor 2
-
-    Parameters
-    ----------
-    * serial: serial class
-
-    Returns
-    -------
-    None
-    '''
-    serial.reset_output_buffer()
-    serial.reset_input_buffer()
-    serial.write(bytes('RESETVALUES2\r\n','utf-8'))
-    print('Reset values to zero.')
-
+   
 if __name__ == "__main__":
     main()
