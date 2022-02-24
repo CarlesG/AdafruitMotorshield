@@ -9,13 +9,11 @@ def main():
     for item in ports:
         print(item.name, ':', item.description)
     print("---------------------------------------------")
-
     port = ports[0].name
     baud = 9600
-
     try:
     # Open the serial port for Arduino COM
-        ser = serial.Serial(port, baud, timeout = 1) 
+        ser = serial.Serial(port, baud, timeout = 3) 
     except serial.SerialException as var: # var contains details of the issue
         print('An exception occured')
         print('Exception details', var)
@@ -32,8 +30,8 @@ def main():
             print(read_position(ser))
         # Testing  go to reset function 
             gotoreset(ser) 
+            time.sleep(2)
             reset_values(ser)
-            time.sleep(0.1)
             print(read_position(ser))
 
         except serial.SerialException as var2:
@@ -41,7 +39,7 @@ def main():
             print('Exception details', var2)
         else:
             reset_values(ser)
-            time.sleep(0.1)
+            time.sleep(1)
             print(read_position(ser))
             
 def write_position(serial,position):
@@ -57,7 +55,8 @@ def write_position(serial,position):
     -------
     None
     '''
-
+    serial.reset_output_buffer()
+    serial.reset_input_buffer()
     serial.write(bytes('POSITION2:' + str(position) + '\r\n','utf-8'))
 
 def read_position(serial):
@@ -80,7 +79,7 @@ def read_position(serial):
 
 def gotoreset(serial):
     ''' Read the position on the serial port 
-
+    
     Parameters
     ----------
     * serial 
@@ -89,6 +88,8 @@ def gotoreset(serial):
     -------
     None
     '''
+    serial.reset_output_buffer()
+    serial.reset_input_buffer()
     serial.write(bytes('GOTORESET2\r\n','utf-8'))
     while(read_position(serial) == ""):
         pass
@@ -105,7 +106,6 @@ def reset_values(serial):
     -------
     None
     '''
-
     serial.reset_output_buffer()
     serial.reset_input_buffer()
     serial.write(bytes('RESETVALUES2\r\n','utf-8'))
