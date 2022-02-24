@@ -52,9 +52,6 @@ We use serial port events for communicate with the Arduino. For testing, we use 
 |**POSITION:**|the motor 1 and 2 will go to the indicated position|
 |**GOTORESET1**|the motor 1 goes to the assigned reset position|
 |**GOTORESET2**|the motor 2 goes to the assignes reset position|
-|**RESETVALUES1**|the actual position of the motor 1 is the position 0|
-|**RESETVALUES2**|the actual position of the motor 2 is the position 0|
-|**RESETVALUES**|the actual position of both motor is the actual position|
 |***IDN?**|the arduino send the info of the arduino program.|
 |**VEL?**|return the value of the velocity of the motors.|
 |**VEL:**|set the velocity to a given value|

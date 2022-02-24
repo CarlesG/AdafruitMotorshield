@@ -398,8 +398,8 @@ void gotoReset2() {
     // Ahora desplazamos el offset del motor
     // myMotor2->step(offset2, BACKWARD, SINGLE);
     // posicionActual2 = posicionActual2 - SENTIDOMOTOR2*offset2;
-    posicionActual2 = posicionActual2 + SENTIDOMOTOR2*offset2;
-    posicionRef2 = posicionActual2; 
+    posicionRef2 = 0;
+    posicionActual2 = 0;
            
     myMotor2 -> release(); // Liberamos el motor
 } // END de la función gotoReset
@@ -486,22 +486,6 @@ void serialEvent()
           {
               // updateCambioEstado();
                  Serial.println("Deshabilitado el cambio de modo");
-          }
-          else if (comandoLeido == "RESETVALUES") 
-          {
-              posicionRef = 0;
-              posicionRef1 = 0;
-           
-          }
-          else if (comandoLeido == "RESETVALUES1") 
-          {
-              posicionRef1 = 0;
-              posicionActual1 = 0;              
-          }
-          else if (comandoLeido == "RESETVALUES2") 
-          {
-              posicionRef2 = 0;              
-              posicionActual2 = 0;
           }          
           else if (colonPosition!=-1)
           {
