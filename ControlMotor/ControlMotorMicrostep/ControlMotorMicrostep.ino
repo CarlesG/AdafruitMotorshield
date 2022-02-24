@@ -414,24 +414,6 @@ void serialEvent()
               // Llamada a la función para ir a la posición de reset
                gotoReset2();           
           } 
-          else if (comandoLeido == "RESETVALUES") 
-          {
-              posicionRef = 0;
-              posicionRef1 = 0;
-              posicionRef2 = 0;
-              posicionActual1 = 0;
-              posicionActual2 = 0;
-          }
-          else if (comandoLeido == "RESETVALUES1") 
-          {
-              posicionRef1 = 0;
-              posicionActual1 = 0;              
-          }
-          else if (comandoLeido == "RESETVALUES2") 
-          {
-              posicionRef2 = 0;              
-              posicionActual2 = 0;
-          }          
           else if (colonPosition!=-1)
           {
               comandoLeido = "";
