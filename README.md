@@ -62,4 +62,12 @@ We use serial port events for communicate with the Arduino. For testing, we use 
 |**OFFSET2:**|set the velocity to a given value|
 |**OFFSET?**|set the velocity to a given value|
    
-For testing the communication
+## 4. PYTHON SCRIPT.
+The control of the system will be in hands of the PC via RS-232. For that we use Pyserial. For intall it we have to execute:
+
+`pip install pyserial`
+
+The script to test the functions to control the motor 2 is `serialcommunication.py`, that we can execute with:
+
+`python serialcommunication.py`
+
