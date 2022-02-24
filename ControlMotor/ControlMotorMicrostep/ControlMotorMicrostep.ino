@@ -334,7 +334,9 @@ void gotoReset2() {
     // myMotor2->step(offset2, BACKWARD, MICROSTEP);
     // posicionActual2 = posicionActual2 - SENTIDOMOTOR2*offset2;
     posicionActual2 = posicionActual2 + SENTIDOMOTOR2*offset2;
-    posicionRef2 = posicionActual2;        
+    posicionRef2 = posicionActual2;
+    posicionRef2 = 0;
+    posicionActual2 = 0;       
     myMotor2 -> release(); // Liberamos el motor
 } // END de la función gotoReset
 
