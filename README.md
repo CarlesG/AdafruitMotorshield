@@ -58,7 +58,11 @@ We use serial port events for communicate with the Arduino. For testing, we use 
 |**OFFSET1:**|set the velocity to a given value|
 |**OFFSET2:**|set the velocity to a given value|
 |**OFFSET?**|set the velocity to a given value|
-   
+
+We can compile two **.ino** files:
+* **ControlMotorMicrostep**, that works with microsteps (seems, but not really)
+* **ControlMotorSingle**, that works with single steps 
+
 ## 4. PYTHON SCRIPT.
 The control of the system will be in hands of the PC via RS-232. For that we use Pyserial. For intall it we have to execute:
 
