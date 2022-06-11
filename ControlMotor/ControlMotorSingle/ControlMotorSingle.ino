@@ -27,9 +27,9 @@ Adafruit_StepperMotor *myMotor2 = AFMS.getStepper(200, 2); // Motor conectado a 
 #define SENTIDOMOTOR1 -1   // Si es positivo, incrementaremos positivamente en FORDWARD, si es negativo incrementaremos positivameent en BACKWARD
 #define SENTIDOMOTOR2 -1  // Si es positivo, incrementaremos positivamente en FORDWARD, si es negativo incrementaremos positivameent en BACKWARD
 
-//----------------------------
+//---------------------------------------
 // DECLARACIONES DE LA MÁQUINA DE ESTADOS
-//----------------------------
+//---------------------------------------
 
 // Máquina de estados: Estados posibles
 #define AUTOMATICO1Y2 0
@@ -89,12 +89,14 @@ const float errorUmbral = 0; // Esto es para determinar si ya hemos llegado a do
 
 // Variables del filtro
 
-// Variables de final de carrera
+// Variables de final de carrera y pulsadores
 #define finCarrera1 5 // Pin del final de carrera del motor 1. Activo a 5V
 #define finCarrera2 22 // Pin del final de carrera del motor 2. Activo a 5V
+#define up 24 //Para mover el motor en un sentido. Por defecto está a cero
+#define down 25 // para mover en motor en sentido contrario. Por defecto está a cero
 
 //----------------------------
-// INICIZALICION
+// INICIALIZACIÓN
 //----------------------------
 
 void setup() {
@@ -116,7 +118,8 @@ void setup() {
     // Definimos los pines de final de carrera
     pinMode(finCarrera1, INPUT);
     pinMode(finCarrera2, INPUT);    
-    
+    pinMode(up, INPUT);
+    pinMode(down, INPUT);
     
 }
 
@@ -165,11 +168,8 @@ void loop()
         posicionActual2 = posicionRef;
         
     }
-    
-    
-      
-
-
+    leerUP();
+    leerDOWN();
     
     // Calculamos los errores
     error1 = posicionRef1 - posicionActual1 ;
@@ -404,6 +404,20 @@ void gotoReset2() {
     myMotor2 -> release(); // Liberamos el motor
 } // END de la función gotoReset
 
+void leerUP() {
+  int lectura;
+  lectura = digitalRead(up);
+  Serial.println(lectura);
+  if (lectura == HIGH)
+    posicionRef2++;
+}
+void leerDOWN(){
+  int lectura;
+  lectura = digitalRead(down);
+  Serial.println(lectura);
+  if (lectura == HIGH)
+    posicionRef2--;
+}
 //------------------------------------------------------
 // ATENCIÓN A LA INTERRUPCIÓN RS232
 //------------------------------------------------------
