@@ -39,15 +39,20 @@ Morevover, we have to connect the Midatec inductive sensor to pin 22. It has a p
 
 The input mapping variables for the arduino are:
 
-* **DIGITAL INPUT**: 22, MOTOR 2
-* **DIGITAL INPUT**: 24, MOTOR 1 (optional)
+* **DIGITAL INPUT**: 22, RESET INDUCTIVE SENSOR FOR THE MOTOR 2
+* **DIGITAL INPUT**: 24, RESET INDUCTIVE SENSOR FOR THE MOTOR 1 (optional)
+
+For manual control of the motor 2, we have implement a simple circuit with two pulsers, and with a pull dowon configuration:
+
+* **DIGITAL INPUT**: 24, UP PULSER MANUAL MOTOR CONTROL (optional)
+* **DIGITAL INPUT**: 25, DOWN PULSER MANUAL MOTOR CONTROL(optional)
 
 ## 3. RS-232 COMMUNICATION PROTOCOL.
 
 We use serial port events for communicate with the Arduino. For testing, we use the Serial Monitor of the Arduino IDE.
 
-|COMMAND |DESCRIPTION |
-|-|-|
+|COMMAND|DESCRIPTION|
+|:-----:|:---------:|
 |**POSITION1:**|the motor 1 will go to a indicated position|
 |**POSITION2:**|the motor 2 will go to the indicated position|
 |**POSITION:**|the motor 1 and 2 will go to the indicated position|
@@ -72,4 +77,3 @@ The control of the system will be in hands of the PC via RS-232. For that we use
 The script to test the functions to control the motor 2 is `serialcommunication.py`, that we can execute with:
 
 `python serialcommunication.py`
-
