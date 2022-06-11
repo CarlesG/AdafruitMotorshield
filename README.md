@@ -39,8 +39,8 @@ Morevover, we have to connect the Midatec inductive sensor to pin 22. It has a p
 
 The input mapping variables for the arduino are:
 
-* **DIGITAL INPUT**: 22, MOTOR 2
-* **DIGITAL INPUT**: 24, MOTOR 1 (optional)
+* **DIGITAL INPUT**: 22, RESET INDUCTIVE SENSOR FOR THE MOTOR 2
+* **DIGITAL INPUT**: 24, RESET INDUCTIVE SENSOR FOR THE MOTOR 1 (optional)
 
 ## 3. RS-232 COMMUNICATION PROTOCOL.
 
