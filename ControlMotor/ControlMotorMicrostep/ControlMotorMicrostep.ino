@@ -72,7 +72,7 @@ long velocidad = 10; // Velocidad rpmP
 float error1 = 0; // Error 1 entre la comanda y el sensor 1
 float error2 = 0; // Error 2 entre la comanda y el sensor 1
 const float errorUmbral = 0; // Esto es para determinar si ya hemos llegado a donde toca y no tenemos que movermos más.
-
+  
 // Variables del filtro
 
 // Variables de final de carrera
